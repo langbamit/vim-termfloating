@@ -1,7 +1,6 @@
 let g:term_b_buf = 0
 let g:term_w_buf = 0
 
-
 function! termfloating#Toggle()
     let found = bufwinnr(g:term_w_buf)
     if found > 0
