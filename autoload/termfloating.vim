@@ -44,7 +44,6 @@ function! s:openFloatTerm()
     \ }
   let g:term_b_buf = nvim_create_buf(v:false, v:true)
   let s:term_b_win = nvim_open_win(g:term_b_buf, v:true, border_opts)
-  call setbufvar(bufnr('%'), 'term_border_window', 1)
   setlocal colorcolumn=
   setlocal nobuflisted
   " Main Window
@@ -62,11 +61,12 @@ function! s:openFloatTerm()
     let g:term_w_buf = nvim_create_buf(v:false, v:true)
     call nvim_open_win(g:term_w_buf, v:true, opts)
     terminal
+    call setbufvar(bufnr('%'), 'term_floating_window', 1)
     " Hook up TermClose event to close both terminal and border windows
     augroup NvimCloseTermWin
       autocmd!
       autocmd TermClose <buffer> if &buftype=='terminal'
-        \ && getbufvar(bufnr('%'), 'term_border_window') == 1 |
+        \ && getbufvar(bufnr('%'), 'term_floating_window') == 1 |
         \ call s:onCloseFloatTerm() |
         \ endif
     augroup END
