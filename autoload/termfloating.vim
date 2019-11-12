@@ -9,7 +9,7 @@ function! termfloating#Toggle()
         execute bufwinnr(g:term_b_buf) . ' wincmd q'
       else
         execute found . ' wincmd w'
-        xecute bufwinnr(g:term_b_buf) . ' wincmd w'
+        execute bufwinnr(g:term_b_buf) . ' wincmd w'
       endif
     else
       call s:openFloatTerm()
